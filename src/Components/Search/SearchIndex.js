@@ -5,30 +5,33 @@ class SearchIndex extends Component {
   constructor() {
     super()
     this.state = {
-      things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards']
+      things: ['pen', 'marker', 'eraser', 'notebook', 'pencil', 'scissors', 'highlighter', 'stapler', 'paper clip', 'binder', 'hole punch', 'laminator', 'laminating sheets', 'protective sheets', 'index cards'],
+      input: ''
     }
-    console.log(this.state.things)
   }
 
-  
 
-  
-  render() {
-    
-    //  function searchFunction() {
-    //   return this.state.thing == input
-    //  }
-
-  return (
-    <div>
-      <Input placeholder='Search Here' />
-      <h3>Results:</h3>
-      <h2>
-        {/* {this.state.things.filter(searchFunction)} */}
-      </h2>
-    </div>
-  )
+  handleInput = (e) => {
+    this.setState({
+       input: e.target.value
+    })
 }
+
+
+  render() {
+
+    let { things, input} = this.state
+
+    return (
+      <div>
+        <Input placeholder='Search Here' onChange={(e) => {this.handleInput(e)}}/>
+        <h3>Results:</h3>
+        <h2>
+          {things.filter(things => input == things)}
+        </h2>
+      </div>
+    )
+  }
 }
 
 export default SearchIndex;
